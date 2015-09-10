@@ -1,0 +1,24 @@
+{
+  "name": "secretfriend_web",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "~1.4.0",
+    "angular-bootstrap": "~0.13.3",
+    "angular-route": "~1.4.0",
+    "bootstrap": "~3.3.4",
+    "font-awesome": "~4.3.0"
+  },
+  "overrides": {
+    "bootstrap": {
+      "main": [
+        "dist/css/bootstrap.css",
+        "dist/js/bootstrap.js"
+      ]
+    },
+    "socket.io-client": {
+      "main": [
+        "socket.io.js"
+      ]
+    }
+  }
+}
