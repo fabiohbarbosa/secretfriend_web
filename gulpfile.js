@@ -131,3 +131,33 @@ gulp.task('test', ['inject-karma'], function (done) {
         done();
     }).start();
 });
+
+// Minify
+var concat = require('gulp-concat');
+var rename = require('gulp-rename');
+var uglify = require('gulp-uglify'); // minify js
+var minifycss = require('gulp-minify-css');
+var sourcemaps = require('gulp-sourcemaps');
+var clean = require('gulp-clean');
+
+gulp.task('minify', ['minify-js', 'minify-css']);
+
+gulp.task('minify-js', function () {
+    gulp.src(SOURCES_JS)
+        .pipe(concat('all.js'))
+        .pipe(gulp.dest('dist/js/'))
+        .pipe(rename('all.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('dist/js/'));
+});
+
+gulp.task('minify-css', function() {
+    gulp.src(SOURCES_CSS)
+        .pipe(concat('all.css'))
+        .pipe(gulp.dest('dist/css/'))
+        .pipe(rename('all.min.css'))
+        .pipe(sourcemaps.init())
+        .pipe(minifycss())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest('dist/css/'));
+});
