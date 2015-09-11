@@ -64,6 +64,7 @@ gulp.task('server', ['jshint', 'inject'], function () {
     gulp.watch(SOURCES_HTML).on('change', browserSync.reload);
 });
 
+gulp.task('serverMin', ['isDist', 'server']);
 
 // jshint
 var jshint = require('gulp-jshint');
