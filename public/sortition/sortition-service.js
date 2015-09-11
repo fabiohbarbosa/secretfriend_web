@@ -17,7 +17,7 @@ app.service('SortitionService', ['$http', function ($http) {
     this.sendEmail = function (sortition) {
         return $http({
             method: 'PUT',
-            url: Util.URL_BACKEND+ENDPOINT+'',
+            url: Util.URL_BACKEND+ENDPOINT+'/send_email',
             data: sortition,
             headers: {
                 'Content-Type': 'application/json'

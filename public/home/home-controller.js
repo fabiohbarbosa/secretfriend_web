@@ -37,7 +37,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'PersonService', function ($scop
 
         var okFunction = function () {
             personService.delete(person.id).success(function () {
-                $controller.findAll(1, perPage); // keeping on the same page listing
+                $controller.findAll(1, $scope.perPage); // keeping on the same page listing
             }, function (err) {
                 console.log(err);
             });
@@ -115,7 +115,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'PersonService', function ($scop
     $scope.createPerson = function() {
         $scope.successMessage = undefined;
         $controller.createModal(true).result.then(function() {
-            $controller.findAll(1, perPage); // go to the first page beause have a new person
+            $controller.findAll(1, $scope.perPage); // go to the first page beause have a new person
             $scope.successMessage = 'Usuário criado com sucesso';
         }, function(err) {
             console.log(err);
@@ -129,7 +129,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'PersonService', function ($scop
     $scope.editPerson = function(person) {
         $scope.successMessage = undefined;
         $controller.createModal(false, person).result.then(function() {
-            $controller.findAll($scope.page, perPage); // keeping on the same page listing
+            $controller.findAll($scope.page, $scope.perPage); // keeping on the same page listing
             $scope.successMessage = 'Usuário alterado com sucesso';
         }, function(err) {
             console.log(err);

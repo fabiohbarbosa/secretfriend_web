@@ -1,9 +1,10 @@
 /**
  * Focus directive
  */
-app.directive('focusMe', function($timeout, $parse) {
+
+app.directive('focusMe', [function($timeout, $parse) {
     return {
-        link: function(scope, element, attrs) {
+        link: ['scope', 'element', 'attrs', function(scope, element, attrs) {
             var model = $parse(attrs.focusMe);
             scope.$watch(model, function(value) {
                 if(value === true) {
@@ -13,5 +14,5 @@ app.directive('focusMe', function($timeout, $parse) {
                 }
             });
         }
-    };
-});
+    ]};
+}]);

@@ -7,6 +7,12 @@ var GULP_FILE = 'gulpfile.js';
 var SOURCES_JS = [
     rootPath+'public/**/*.js',
     '!'+rootPath+'public/bower_components/**/*.js',
+    '!'+rootPath+'public/_dist/*.js',
+];
+
+var SOURCES_JS_DIST = [
+    rootPath+'public/_dist/**/*.min.js',
+    '!'+rootPath+'public/bower_components/**/*.js',
 ];
 
 var SOURCES_HTML = [
@@ -15,12 +21,22 @@ var SOURCES_HTML = [
 
 var SOURCES_CSS = [
     rootPath+'public/**/*.css',
-    '!'+rootPath+'public/bower_components/**/*.css'
+    '!'+rootPath+'public/bower_components/**/*.css',
+    '!'+rootPath+'public/_dist/*.css'
+];
+
+var SOURCES_CSS_DIST = [
+    rootPath+'public/_dist/**/*.min.css',
+    '!'+rootPath+'public/bower_components/**/*.css',
 ];
 
 var SOURCES_SPEC = [
     rootPath+'tests/**/*.js'
 ];
+
+var IS_DIST = false;
+var DIST_JS = rootPath+ 'public/_dist';
+var DIST_CSS = rootPath+ 'public/_dist';
 
 var KARMA_CONF_FILE = rootPath + 'tests/karma.conf.js';
 var SPEC_DIRECTORY = rootPath + 'tests/';
@@ -74,9 +90,20 @@ gulp.task('inject', function () {
         exclude: rootPath+'public/bower_components/angular-mocks/angular-mocks.js'
     };
 
+    var source_js = [];
+    var source_css = [];
+
+    if (IS_DIST) {
+        source_js = SOURCES_JS_DIST;
+        source_css = SOURCES_CSS_DIST;
+    } else {
+        source_js = SOURCES_JS;
+        source_css = SOURCES_CSS;
+    }
+
     return gulp.src(rootPath+'public/index.html')
-        .pipe(inject(gulp.src(SOURCES_JS), options))
-        .pipe(inject(gulp.src(SOURCES_CSS), options))
+        .pipe(inject(gulp.src(source_js), options))
+        .pipe(inject(gulp.src(source_css), options))
         .pipe(wiredep(wiredepOptions))
         .pipe(gulp.dest(rootPath+'public'));
 });
@@ -143,21 +170,33 @@ var clean = require('gulp-clean');
 gulp.task('minify', ['minify-js', 'minify-css']);
 
 gulp.task('minify-js', function () {
-    gulp.src(SOURCES_JS)
+    return gulp.src(SOURCES_JS)
         .pipe(concat('all.js'))
-        .pipe(gulp.dest('dist/js/'))
+        .pipe(gulp.dest(DIST_JS))
         .pipe(rename('all.min.js'))
         .pipe(uglify())
-        .pipe(gulp.dest('dist/js/'));
+        .pipe(gulp.dest(DIST_JS));
 });
 
 gulp.task('minify-css', function() {
-    gulp.src(SOURCES_CSS)
+    return gulp.src(SOURCES_CSS)
         .pipe(concat('all.css'))
-        .pipe(gulp.dest('dist/css/'))
+        .pipe(gulp.dest(DIST_CSS))
         .pipe(rename('all.min.css'))
         .pipe(sourcemaps.init())
         .pipe(minifycss())
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/css/'));
+        .pipe(gulp.dest(DIST_CSS));
+});
+
+var zip = require('gulp-zip');
+gulp.task('dist', ['isDist', 'jshint', 'test', 'minify', 'inject'], function() {
+    var source = ['public/**/*.*'];
+    return gulp.src(source)
+        .pipe(zip('secret_friend.zip'))
+        .pipe(gulp.dest('dist'));
+});
+
+gulp.task('isDist', function() {
+    IS_DIST = true;
 });
