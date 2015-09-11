@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h4 class="modal-title">Sorteio</h4>
+</div>
+<blockquote>
+    <div class="modal-body" ng-repeat="result in sortition">
+        <strong>{{result.person.name}}</strong> tirou <strong>{{result.friendSelected.name}}.</strong>
+    </div>
+</blockquote>
+<div class="modal-footer">
+    <button class="btn btn-danger" type="button" ng-click="close()">Fechar</button>
+</div>

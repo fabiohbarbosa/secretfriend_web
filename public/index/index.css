@@ -1,3 +1,11 @@
 .container-secretfriend {
-    margin-top: 60px;
+    margin-top: 75px;
+}
+
+.text-white {
+    color: #fff !important;
+}
+
+.text-white:hover {
+    color: #9d9d9d !important;
 }

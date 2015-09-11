@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h4 class="modal-title">Confirmar</h4>
+</div>
+<div class="modal-body">
+    <p>
+        {{message}}
+    </p>
+</div>
+<div class="modal-footer">
+    <!-- Error message -->
+    <div class="row" ng-show="errorMessage">
+        <div class="col-xs-12 col=sm-12 col-md-12 col-lg-12">
+            <p class="text-danger">
+                <i class="fa fa-exclamation"></i> {{errorMessage}}
+            </p>
+        </div>
+    </div>
+    <button class="btn btn-primary" type="submit" ng-click="ok()">Sim</button>
+    <button class="btn btn-danger" type="button" ng-click="cancel()">Não</button>
+</div>

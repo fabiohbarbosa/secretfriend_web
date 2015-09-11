@@ -1,3 +1,6 @@
+/**
+ * Focus directive
+ */
 app.directive('focusMe', function($timeout, $parse) {
     return {
         link: function(scope, element, attrs) {
@@ -6,7 +9,7 @@ app.directive('focusMe', function($timeout, $parse) {
                 if(value === true) {
                     $timeout(function() {
                         element[0].focus();
-                    });
+                    }, 200);
                 }
             });
         }

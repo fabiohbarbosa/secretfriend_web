@@ -1,28 +1,64 @@
 <div ng-controller="HomeCtrl">
 
-    <h4>Listagem de Pessoas</h4>
+    <div class="row">
+        <div class="col-md-12">
+            <button type="submit" class="btn btn-primary" ng-click="createPerson()"> Cadastrar</button>
+        </div>
+    </div>
 
     <div class="row">
-        <div class="col-md-1">
-            <button type="submit" class="btn btn-primary" ng-click="createModal()"> Cadastrar </button>
+        <!-- Success message -->
+        <div class="col-md-12">
+            <label></label>
+
+            <p class="text-success" ng-show="successMessage">
+                <i class="fa fa-check"></i> {{successMessage}}
+            </p>
         </div>
-        <div class="col-md-11">
-            <form class="form-inline">
-                <div class="form-group">
-                    <input type="text" class="form-control" placeholder="Nome">
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" placeholder="E-mail">
-                </div>
+    </div>
+
+    <!-- Search and Sortition -->
+    <div class="row">
+        <form ng-submit="findByNameOrEmail(search)">
+            <div class="col-md-9">
+                <input type="text" class="form-control" ng-model="search" placeholder="Pesquisar">
+            </div>
+            <div class="col-md-3">
                 <button type="submit" class="btn btn-default">Buscar</button>
-            </form>
+                <span ng-controller="SortitionCtrl">
+                    <button type="button" class="btn btn-success" ng-if="allPeople.length > 1" ng-click="sortition()"> Sortear </button>
+                </span>
+            </div>
+        </form>
+    </div>
+    <hr>
+    <div class="row" ng-if="people.length > 0">
+        <div class="col-md-12">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th class="col-md-2"> # ID</th>
+                    <th class="col-md-6"> Nome</th>
+                    <th class="col-md-3"> E-mail</th>
+                    <th class="col-md-1"></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="person in people">
+                    <td>{{person.id}}</td>
+                    <td>{{person.name}}</td>
+                    <td>{{person.email}}</td>
+                    <td>
+                        <a class="btn btn-default btn-xs" ng-click="editPerson(person)" title="Editar">
+                            <i class="fa fa-pencil"/>
+                        </a>
+                        <a class="btn btn-danger btn-xs" ng-click="removePerson(person)" title="Remover">
+                            <i class="fa fa-minus"/>
+                        </a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
-
-    <hr>
-
-    <div class="row">
-
-    </div>
-
 </div>
