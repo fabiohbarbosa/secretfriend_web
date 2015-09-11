@@ -81,6 +81,7 @@ gulp.task('inject', function () {
         .pipe(gulp.dest(rootPath+'public'));
 });
 
+// Karma
 gulp.task('inject-karma', function () {
     // Inject all SOURCE_JS files
     function injectAppJsFiles(filepath, i, length) {
@@ -106,7 +107,8 @@ gulp.task('inject-karma', function () {
         })).pipe(gulp.dest(SPEC_DIRECTORY));
 });
 
-// Karma
+// Tests
+var argv = require('yargs').argv;
 var Server = require('karma').Server;
 gulp.task('test', ['inject-karma'], function (done) {
     var singleRun, browsers;

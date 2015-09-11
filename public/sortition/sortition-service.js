@@ -8,4 +8,22 @@ app.service('sortitionService', ['$http', function ($http) {
     this.sortition = function () {
         return $http.get(Util.URL_BACKEND+ENDPOINT);
     };
+
+    /**
+     * Send e-mail after sortition
+     * @param sortition Sortition people
+     * @returns $http promisse
+     */
+    this.sendEmail = function (sortition) {
+        return $http({
+            method: 'PUT',
+            url: Util.URL_BACKEND+ENDPOINT+'/send_email',
+            data: sortition,
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+    };
+
+
 }]);

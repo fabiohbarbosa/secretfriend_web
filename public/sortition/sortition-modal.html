@@ -7,5 +7,24 @@
     </div>
 </blockquote>
 <div class="modal-footer">
+    <!-- Success message -->
+    <div class="row" ng-show="successMessage">
+        <div class="col-xs-12 col=sm-12 col-md-12 col-lg-12">
+            <p class="text-success">
+                <i class="fa fa-check"></i> {{successMessage}}
+            </p>
+        </div>
+    </div>
+
+    <!-- Error message -->
+    <div class="row" ng-show="errorMessage">
+        <div class="col-xs-12 col=sm-12 col-md-12 col-lg-12">
+            <p class="text-danger">
+                <i class="fa fa-exclamation"></i> {{errorMessage}}
+            </p>
+        </div>
+    </div>
+
+    <button class="btn btn-success" type="button" ng-click="sendEmail()">Enviar E-mail</button>
     <button class="btn btn-danger" type="button" ng-click="close()">Fechar</button>
 </div>

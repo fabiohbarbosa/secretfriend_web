@@ -8,12 +8,13 @@ app.service('personService', ['$http', function ($http) {
      * @returns $http promisse
      */
     this.findAll = function (page, perPage) {
-        var newPage = page-1;
-        return $http.get(Util.URL_BACKEND+ENDPOINT+'?page='+newPage+'&perPage='+perPage);
+        var ajustPage = page-1; // back-end page start in 0
+        return $http.get(Util.URL_BACKEND+ENDPOINT+'?page='+ajustPage+'&perPage='+perPage);
     };
 
-    this.findByNameOrEmail = function(search) {
-        return $http.get(Util.URL_BACKEND+ENDPOINT+'/advanced_search?search='+search);
+    this.findByNameOrEmail = function(search, page, perPage) {
+        var ajustPage = page-1; // back-end page start in 0
+        return $http.get(Util.URL_BACKEND+ENDPOINT+'/advanced_search?search='+search+'&page='+ajustPage+'&perPage='+perPage);
     };
 
     /**

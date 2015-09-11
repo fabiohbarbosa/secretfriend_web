@@ -9,7 +9,7 @@
 
     <!-- Search and Sortition -->
     <div class="row">
-        <form ng-submit="findByNameOrEmail(search)">
+        <form ng-submit="findByNameOrEmail(search, 1, perPage)">
             <div class="col-md-9">
                 <input type="text" class="form-control" ng-model="search" placeholder="Pesquisar">
             </div>
@@ -50,11 +50,12 @@
                 </tbody>
             </table>
         </div>
-        <div class="row" ng-if="totalRegister > itensPerPage">
+        <div class="row" ng-if="totalRegister > perPage">
             <div class="col-md-12">
                 <div align="center">
-                    <pagination total-items="totalRegister" items-per-page="itensPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)">
+                    <pagination total-items="totalRegister" items-per-page="perPage" ng-model="currentPage" ng-change="pageChanged(currentPage, search)">
                     </pagination>
+                    <span class="center-block text-info">Total de registros: {{totalRegister}}</span>
                 </div>
             </div>
         </div>
