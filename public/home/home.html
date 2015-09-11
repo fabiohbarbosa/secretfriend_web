@@ -4,17 +4,7 @@
         <div class="col-md-12">
             <button type="submit" class="btn btn-primary" ng-click="createPerson()"> Cadastrar</button>
         </div>
-    </div>
-
-    <div class="row">
-        <!-- Success message -->
-        <div class="col-md-12">
-            <label></label>
-
-            <p class="text-success" ng-show="successMessage">
-                <i class="fa fa-check"></i> {{successMessage}}
-            </p>
-        </div>
+        <label></label>
     </div>
 
     <!-- Search and Sortition -->
@@ -60,5 +50,23 @@
                 </tbody>
             </table>
         </div>
+        <div class="row" ng-if="totalRegister > itensPerPage">
+            <div class="col-md-12">
+                <div align="center">
+                    <pagination total-items="totalRegister" items-per-page="itensPerPage" ng-model="currentPage" ng-change="pageChanged(currentPage)">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success message -->
+        <div class="row">
+            <div class="col-md-12">
+                <p class="text-success" ng-show="successMessage">
+                    <i class="fa fa-check"></i> {{successMessage}}
+                </p>
+            </div>
+        </div>
+
     </div>
 </div>

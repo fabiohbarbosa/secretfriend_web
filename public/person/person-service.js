@@ -3,10 +3,13 @@ app.service('personService', ['$http', function ($http) {
 
     /**
      * Find all people
+     * @param page Page
+     * @param perPage Registers per page
      * @returns $http promisse
      */
-    this.findAll = function () {
-        return $http.get(Util.URL_BACKEND+ENDPOINT);
+    this.findAll = function (page, perPage) {
+        var newPage = page-1;
+        return $http.get(Util.URL_BACKEND+ENDPOINT+'?page='+newPage+'&perPage='+perPage);
     };
 
     this.findByNameOrEmail = function(search) {

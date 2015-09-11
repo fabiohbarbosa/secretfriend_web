@@ -37,7 +37,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
 
         var okFunction = function () {
             personService.delete(person.id).success(function () {
-                findAll();
+                findAll(1, itensPerPage); // keeping on the same page listing
             }, function (err) {
                 console.log(err);
             });
@@ -67,10 +67,11 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
     /**
      * Find all people
      */
-    function findAll() {
-        personService.findAll().success(function (people) {
-            $scope.allPeople = people; // using to show sortition button
-            $scope.people = people;
+    function findAll(page, perPage) {
+        personService.findAll(page, perPage).success(function (data) {
+            $scope.allPeople = data.people; // using to show sortition button
+            $scope.people = data.people;
+            $scope.totalRegister = data.totalRegister;
         }).error(function (err) {
             if (err && err.message) {
                 $scope.errorMessage = err.message;
@@ -106,7 +107,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
     $scope.createPerson = function() {
         $scope.successMessage = '';
         createModal(true).result.then(function() {
-            findAll();
+            findAll(1, itensPerPage); // go to the first page beause have a new person
             $scope.successMessage = 'Usuário criado com sucesso';
         }, function(err) {
             console.log(err);
@@ -120,7 +121,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
     $scope.editPerson = function(person) {
         $scope.successMessage = '';
         createModal(false, person).result.then(function() {
-            findAll();
+            findAll($scope.page, itensPerPage); // keeping on the same page listing
             $scope.successMessage = 'Usuário alterado com sucesso';
         }, function(err) {
             console.log(err);
@@ -140,6 +141,17 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
         });
     };
 
+    // Pageable
+    var itensPerPage = 5;
+    $scope.itensPerPage = itensPerPage;
+    /**
+     * Page changed
+     */
+    $scope.pageChanged = function(currentPage) {
+        $scope.page = currentPage;
+        findAll($scope.page, itensPerPage);
+    };
+
     // init function
-    findAll();
+    findAll(1, itensPerPage);
 }]);
