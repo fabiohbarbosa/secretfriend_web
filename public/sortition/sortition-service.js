@@ -1,4 +1,4 @@
-app.service('sortitionService', ['$http', function ($http) {
+app.service('SortitionService', ['$http', function ($http) {
     var ENDPOINT = '/sortition';
 
     /**
@@ -17,7 +17,7 @@ app.service('sortitionService', ['$http', function ($http) {
     this.sendEmail = function (sortition) {
         return $http({
             method: 'PUT',
-            url: Util.URL_BACKEND+ENDPOINT+'/send_email',
+            url: Util.URL_BACKEND+ENDPOINT+'',
             data: sortition,
             headers: {
                 'Content-Type': 'application/json'

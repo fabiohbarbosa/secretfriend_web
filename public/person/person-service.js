@@ -1,4 +1,4 @@
-app.service('personService', ['$http', function ($http) {
+app.service('PersonService', ['$http', function ($http) {
     var ENDPOINT = '/person';
 
     /**

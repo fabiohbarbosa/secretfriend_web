@@ -53,7 +53,7 @@
         <div class="row" ng-if="totalRegister > perPage">
             <div class="col-md-12">
                 <div align="center">
-                    <pagination total-items="totalRegister" items-per-page="perPage" ng-model="currentPage" ng-change="pageChanged(currentPage, search)">
+                    <pagination total-items="totalRegister" items-per-page="perPage" ng-model="currentPage" ng-change="changePage(search, currentPage, perPage)">
                     </pagination>
                     <span class="center-block text-info">Total de registros: {{totalRegister}}</span>
                 </div>

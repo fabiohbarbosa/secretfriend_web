@@ -1,4 +1,4 @@
-app.controller('SortitionModalCtrl', ['$scope', '$modalInstance', '$modal', 'sortition', 'sortitionService', function ($scope, $modalInstance, $modal, sortition, sortitionService) {
+app.controller('SortitionModalCtrl', ['$scope', '$modalInstance', '$modal', 'sortition', 'SortitionService', function ($scope, $modalInstance, $modal, sortition, sortitionService) {
     $scope.sortition = sortition;
 
     $controller = this;

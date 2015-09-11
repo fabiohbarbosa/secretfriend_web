@@ -1,4 +1,4 @@
-app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scope, $modal, personService) {
+app.controller('HomeCtrl', ['$scope', '$modal', 'PersonService', function ($scope, $modal, personService) {
     /**
      * ------------------------------------------------------------------
      * PRIVATE FUNCTIONS
@@ -113,7 +113,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
      * Open modal to create person
      */
     $scope.createPerson = function() {
-        $scope.successMessage = '';
+        $scope.successMessage = undefined;
         $controller.createModal(true).result.then(function() {
             $controller.findAll(1, perPage); // go to the first page beause have a new person
             $scope.successMessage = 'Usuário criado com sucesso';
@@ -127,7 +127,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
      * @param person Person object
      */
     $scope.editPerson = function(person) {
-        $scope.successMessage = '';
+        $scope.successMessage = undefined;
         $controller.createModal(false, person).result.then(function() {
             $controller.findAll($scope.page, perPage); // keeping on the same page listing
             $scope.successMessage = 'Usuário alterado com sucesso';
@@ -141,7 +141,7 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
      * @param person Person object
      */
     $scope.removePerson = function(person) {
-        $scope.successMessage = '';
+        $scope.successMessage = undefined;
         $controller.confirmDialog(person).result.then(function() {
             $scope.successMessage = 'Usuário removido com sucesso';
         }, function(err) {
@@ -149,25 +149,21 @@ app.controller('HomeCtrl', ['$scope', '$modal', 'personService', function ($scop
         });
     };
 
-    // Pageable
-    var perPage = 5;
-    $scope.perPage = perPage;
     /**
      * Page changed
      */
-    $scope.pageChanged = function(currentPage, search) {
+    $scope.changePage = function(search, currentPage, perPage) {
         $scope.page = currentPage;
         if (search) {
-            $scope.findByNameOrEmail(search, $scope.page, perPage);
+            $scope.findByNameOrEmail(search, currentPage, perPage);
         } else {
-            $controller.findAll($scope.page, perPage);    
+            $controller.findAll(currentPage, perPage);
         }
     };
 
-    $scope.test = function(test) {
-        return test;
-    };
+    // init function and variables
+    $scope.perPage = 5;
+    $scope.page = 1;
 
-    // init function
-    $controller.findAll(1, perPage);
+    $controller.findAll($scope.page, $scope.perPage);
 }]);

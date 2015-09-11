@@ -1,4 +1,4 @@
-app.controller('SortitionCtrl', ['$scope', '$modal', 'sortitionService', function ($scope, $modal, sortitionService) {
+app.controller('SortitionCtrl', ['$scope', '$modal', 'SortitionService', function ($scope, $modal, sortitionService) {
     $scope.sortition = function() {
         sortitionService.sortition().success(function(sortition) {
             createModal(sortition);

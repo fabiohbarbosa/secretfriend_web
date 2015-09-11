@@ -1,15 +1,23 @@
-app.controller('CreatePersonCtrl', ['$scope', '$modalInstance', 'personService', 'isNew', 'person', function ($scope, $modalInstance, personService, isNew, person) {
+app.controller('CreatePersonCtrl', ['$scope', '$modalInstance', 'PersonService', 'isNew', 'person', function ($scope, $modalInstance, personService, isNew, person) {
 
-    // initialize variables
-    $scope.errorMessage = '';
-    $scope.newPerson = person;
+    var $controller = this;
 
-    // define title
-    if (isNew) {
-        $scope.title = 'Cadastrar';
-    } else {
-        $scope.title = 'Alterar';
-    }
+    /**
+     * Initialize received variables and scope variables
+     * @param isNew
+     * @param person
+     */
+    this.initializeVariables = function(isNew, person) {
+        $scope.errorMessage = undefined;
+        $scope.newPerson = person;
+
+        // define title
+        if (isNew) {
+            $scope.title = 'Cadastrar';
+        } else {
+            $scope.title = 'Alterar';
+        }
+    };
 
     /**
      * Manipulate errors
@@ -59,5 +67,7 @@ app.controller('CreatePersonCtrl', ['$scope', '$modalInstance', 'personService',
     $scope.cleanError = function() {
         $scope.errorMessage = undefined;
     };
+
+    $controller.initializeVariables(isNew, person);
 
 }]);
