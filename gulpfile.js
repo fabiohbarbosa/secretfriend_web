@@ -82,7 +82,7 @@ gulp.task('inject', function () {
 });
 
 gulp.task('inject-karma', function () {
-    // Inject all SOURCE_JS_CLIENT files
+    // Inject all SOURCE_JS files
     function injectAppJsFiles(filepath, i, length) {
         return '"..' + filepath + '"' + (i + 1 < length ? ',\n            ' : '');
     }
