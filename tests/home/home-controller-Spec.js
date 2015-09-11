@@ -31,7 +31,6 @@ describe('TestHomeCtrl', function () {
         it('initialize perPage', function () {
             expect(scope.perPage).toBeDefined();
         });
-
     });
 
     describe('Scope functions', function () {
@@ -94,12 +93,12 @@ describe('TestHomeCtrl', function () {
             });
 
             it('clear message of success', function () {
-                var person = { id: 1 };
+                var person = {id: 1};
                 scope.editPerson(person);
                 expect(scope.successMessage).toBeUndefined();
             });
             it('call createModal function', function () {
-                var person = { id: 1 };
+                var person = {id: 1};
                 scope.editPerson(person);
                 expect(controller.createModal).toHaveBeenCalledWith(false, person);
             });
@@ -111,12 +110,12 @@ describe('TestHomeCtrl', function () {
             });
 
             it('clear message of success', function () {
-                var person = { id: 1 };
+                var person = {id: 1};
                 scope.removePerson(person);
                 expect(scope.successMessage).toBeUndefined();
             });
             it('call confirmDialog function', function () {
-                var person = { id: 1 };
+                var person = {id: 1};
                 scope.removePerson(person);
                 expect(controller.confirmDialog).toHaveBeenCalledWith(person);
             });

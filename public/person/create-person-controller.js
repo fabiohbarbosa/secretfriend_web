@@ -10,6 +10,7 @@ app.controller('CreatePersonCtrl', ['$scope', '$modalInstance', 'PersonService',
     this.initializeVariables = function(isNew, person) {
         $scope.errorMessage = undefined;
         $scope.newPerson = person;
+        $scope.isNew = isNew;
 
         // define title
         if (isNew) {
@@ -23,33 +24,32 @@ app.controller('CreatePersonCtrl', ['$scope', '$modalInstance', 'PersonService',
      * Manipulate errors
      * @param err
      */
-    function fctErr(err) {
+    this.fctErr = function(err) {
         if (err && err.message) {
             $scope.errorMessage = err.message;
-            console.error(err);
         } else {
-            $scope.errorMessage = 'Error ao comunicar com o servidor';
-            console.error($scope.errorMessage);
+            $scope.errorMessage = 'Erro ao comunicar com o servidor';
         }
-    }
+    };
 
     /**
      * Confirm function to create person
+     * @param _isNew Verify if person is new
      * @param newPerson New person will be added
      */
-    $scope.ok = function (newPerson) {
+    $scope.ok = function (_isNew, newPerson) {
         // Create
-        if (isNew) {
+        if (_isNew) {
             personService.save(newPerson).success(function() {
                 $modalInstance.close();
             }).error(function(err) {
-                fctErr(err);
+                $controller.fctErr(err);
             });
         } else { // Update
             personService.update(newPerson).success(function() {
                 $modalInstance.close();
             }).error(function(err) {
-                fctErr(err);
+                $controller.fctErr(err);
             });
         }
     };
