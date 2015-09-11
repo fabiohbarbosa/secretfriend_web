@@ -3,3 +3,4 @@ dist/
 .idea/
 *.iml
 public/bower_components/
+public/_dist/
