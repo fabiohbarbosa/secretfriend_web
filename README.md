@@ -7,6 +7,14 @@ Secret Friend Front-End Project
 * Gulp global;
 * Bower global;
 
+### Install Node.js and NPM
+https://github.com/nodejs/node-v0.x-archive/wiki/Installing-Node.js-via-package-manager
+
+### Install gulp and bower global:
+```sh
+sudo npm install gulp bower -g
+```
+
 ### Install the Application:
 Clone this repository:
 ```sh
