@@ -24,7 +24,8 @@
     "karma-spec-reporter": "0.0.20",
     "karma-wiredep": "^1.0.1",
     "phantomjs": "^1.9.18",
-    "wiredep": "^2.2.2"
+    "wiredep": "^2.2.2",
+    "yargs": "^3.25.0"
   },
   "engines": {
     "node": ">=0.12.0"
